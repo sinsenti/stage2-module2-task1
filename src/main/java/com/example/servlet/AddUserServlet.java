@@ -1,6 +1,7 @@
 package com.example.servlet;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import com.example.*;
 import javax.servlet.ServletException;
@@ -21,10 +22,10 @@ public class AddUserServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    String firstName = req.getParameter("firstName");
-    String lastName = req.getParameter("lastName");
-    if (firstName != null && lastName != null && !firstName.isEmpty() && !lastName.isEmpty()) {
-      User user = new User(firstName, lastName);
+    Optional<String> firstName = Optional.ofNullable(req.getParameter("firstName"));
+    Optional<String> lastName = Optional.ofNullable(req.getParameter("lastName"));
+    if (firstName.get() != null && lastName.get() != null && !firstName.isPresent() && !lastName.isPresent()) {
+      User user = new User(firstName.get(), lastName.get());
       Warehouse.getInstance().addUser(user);
       req.setAttribute("user", user);
     } else {
