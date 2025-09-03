@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-@WebServlet("/add")
+@WebServlet("")
 public class AddUserServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -16,7 +16,7 @@ public class AddUserServlet extends HttpServlet {
       req.setAttribute("firstName", req.getParameter("firstName"));
       req.setAttribute("lastName", req.getParameter("lastName"));
     }
-    req.getRequestDispatcher("/add.jsp").forward(req, resp);
+    req.getRequestDispatcher("/add").forward(req, resp);
   }
 
   @Override
