@@ -10,7 +10,8 @@ import javax.servlet.http.*;
 @WebServlet("/add")
 public class AddUserServlet extends HttpServlet {
   @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException, NullPointerException {
     if (req.getParameter("firstName") != null) {
       req.setAttribute("firstName", req.getParameter("firstName"));
       req.setAttribute("lastName", req.getParameter("lastName"));
