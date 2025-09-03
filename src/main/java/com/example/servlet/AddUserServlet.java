@@ -9,25 +9,22 @@ import javax.servlet.http.*;
 
 @WebServlet("/add")
 public class AddUserServlet extends HttpServlet {
-
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    req.getRequestDispatcher("").forward(req, resp);
+    req.getRequestDispatcher("/add.jsp").forward(req, resp);
   }
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     String firstName = req.getParameter("firstName");
     String lastName = req.getParameter("lastName");
-    if (firstName != null && lastName != null) {
+    if (firstName != null && lastName != null && !firstName.isEmpty() && !lastName.isEmpty()) {
       User user = new User(firstName, lastName);
       Warehouse.getInstance().addUser(user);
       req.setAttribute("user", user);
     } else {
-      throw new NullPointerException("Invalid input");
+      req.setAttribute("errorMessage", "Both first name and last name are required");
     }
-
-    req.getRequestDispatcher("").forward(req, resp);
-
+    req.getRequestDispatcher("/add.jsp").forward(req, resp);
   }
 }
