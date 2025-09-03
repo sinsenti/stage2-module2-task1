@@ -23,6 +23,8 @@ public class AddUserServlet extends HttpServlet {
       User user = new User(firstName, lastName);
       Warehouse.getInstance().addUser(user);
       req.setAttribute("user", user);
+    } else {
+      throw new NullPointerException("Invalid input");
     }
 
     req.getRequestDispatcher("").forward(req, resp);
