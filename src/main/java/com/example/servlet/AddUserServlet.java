@@ -11,6 +11,10 @@ import javax.servlet.http.*;
 public class AddUserServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    if (req.getParameter("firstName") != null) {
+      req.setAttribute("firstName", req.getParameter("firstName"));
+      req.setAttribute("lastName", req.getParameter("lastName"));
+    }
     req.getRequestDispatcher("/add.jsp").forward(req, resp);
   }
 
